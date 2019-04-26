@@ -1,0 +1,31 @@
+\ifx\allfiles\undefined
+\documentclass[UTF8]{ctexart}
+\begin{document}
+\title{对数线性模型}
+\author{zc12345}
+\date\today
+\maketitle
+\tableofcontents
+\else
+\section{对数线性模型}
+\fi
+\subsection{Logistic Regression}
+\subsubsection{逻辑斯谛分布}
+\paragraph{}
+设X是连续随机变量，则X服从logistic distribution时：
+\subparagraph{}
+分布函数
+\begin{equation}
+F(x)=P(X \leq x)=\frac{1}{1+\mathrm{e}^{-(x-\mu) / \gamma}}
+\end{equation}
+\subparagraph{}
+密度函数
+\begin{equation}
+f(x)=F^{\prime}(x)=\frac{e^{-(x-\mu) / \gamma}}{\gamma\left(1+e^{-(x-\mu) / \gamma}\right)^{2}}
+\end{equation}
+\subsubsection{二项逻辑斯谛回归模型}
+\subsubsection{模型参数估计}
+\subsection{Maximum Entropy Model}
+\ifx\allfiles\undefined
+\end{document}
+\fi

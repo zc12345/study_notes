@@ -1,0 +1,89 @@
+\ifx\allfiles\undefined
+\documentclass[UTF8]{ctexart}
+
+\usepackage{graphicx}
+\usepackage{pythonhighlight}
+
+\bibliographystyle{plain}%指定参考文献的排版样式
+
+\begin{document}
+\title{End-to-End ML Project}
+\author{zc12345}
+\date\today
+\maketitle
+\tableofcontents
+\else
+\section{End-to-End ML Project}
+\fi
+\subsection{常规ML Project流程}
+\paragraph{}
+一个完整的ML项目一般包含以下几个步骤：\par
+1. Look at the big picture.\par
+2. Get the data.\par
+3. Discover and visualize the data to gain insights.\par
+4. Prepare the data for Machine Learning algorithms.\par
+5. Select a model and train it.\par
+6. Fine-tune your model.\par
+7. Present your solution.\par
+8. Launch, monitor, and maintain your system.\par
+
+\subsection{训练集和测试集划分}
+\subsubsection{随机采样}
+
+\paragraph{直接随机划分}
+为了保证再次运行程序时，使用同样的数据集进行随机划分可以得到同样的划分结果，我们需要先进行指定随机种子。
+\begin{python}
+    import numpy as np
+    np.random.seed(42)
+\end{python}
+然后进行随机划分：
+\begin{python}
+    def split_train_test(data, test_ratio):
+        shuffled_indices = np.random.permutation(len(data))
+        test_set_size = int(len(data) * test_ratio)
+        test_indices = shuffled_indices[:test_set_size]
+        train_indices = shuffled_indices[test_set_size:]
+        return data.iloc[train_indices], data.iloc[test_indices]
+\end{python}
+
+\paragraph{使用特征码进行随机划分}
+但是通过上面的随机抽样方法，在online-learning的时候，如果数据集不断更新，那么就没法保证之前放入测试集的数据在数据集更新之后依然位于测试集。
+此时可以使用$digest()$获取特征码的hash值，然后根据hash值来划分测试集和训练集。一般是把数据的ID或者index作为特征码。
+index作为特征码的时候就需要增加的数据只能在后面添加，不能插入到前面。
+\begin{python}
+    import hashlib
+
+    def test_set_check(identifier, test_ratio, hash):
+        return hash(np.int64(identifier)).digest()[-1] < 256 * test_ratio
+
+    def split_train_test_by_id(data, test_ratio, id_column, hash=hashlib.md5):
+        ids = data[id_column]
+        in_test_set = ids.apply(lambda id_: test_set_check(id_, test_ratio, hash))
+        return data.loc[~in_test_set], data.loc[in_test_set]
+\end{python}
+
+
+\paragraph{}
+
+\subsubsection{分层采样}
+根据其中某一个特征，按照该特征的分布进行分层采样。好处是划分的训练集合测试集都更加符合整体数据集的分布。
+\begin{python}
+    from sklearn.model_selection import StratifiedShuffleSplit
+    
+    split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=42)
+    for train_index, test_index in split.split(housing, housing["income_cat"]):
+        strat_train_set = housing.loc[train_index]
+        strat_test_set = housing.loc[test_index]
+\end{python}
+引申：最近一些关于网络优化的论文借鉴了这种分层的思想，比如\cite{lsltr}和\cite{libra_rcnn}。
+
+\renewcommand\refname{参考文献}
+\begin{thebibliography}{99}
+    \bibitem[1]{lsltr} Available at $https://mp.weixin.qq.com/s/fTFyH5jaLEWWPka_XP9EaQ$
+    \bibitem[2]{libra_rcnn}  Available at $https://mp.weixin.qq.com/s/SeEvBsF2GpSj_b9I0SSskQ$
+\end{thebibliography}
+\bibliography{BiBTex}
+
+\ifx\allfiles\undefined
+\end{document}
+\fi
