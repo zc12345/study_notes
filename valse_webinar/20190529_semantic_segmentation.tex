@@ -1,0 +1,83 @@
+\ifx\allfiles\undefined
+\documentclass[UTF8]{ctexart}
+
+\usepackage{graphicx}
+\usepackage{pythonhighlight}
+
+\bibliographystyle{plain}%指定参考文献的排版样式
+
+\begin{document}
+\title{20190529-12 图像语义分割-理解每个像素}
+\author{主持人：程明明（南开大学 ）}
+\date\today
+\maketitle
+\tableofcontents
+%\else
+%\section{20190529-12 图像语义分割-理解每个像素}
+\fi
+\section{Context For Semantic Segmentation}
+
+\subsection{介绍}
+\paragraph{报告嘉宾}
+俞刚（旷视科技）
+
+\paragraph{报告时间}
+2019年5月29日（星期三）晚上20:30（北京时间）
+
+\paragraph{报告题目}Context For Semantic Segmentation
+
+\paragraph{报告人简介}
+俞刚博士现为旷视科技研发总监，Detection 组负责人，2014年毕业于新加坡南洋理工大学。
+博士毕业后在南洋理工大学从事 research fellow 的研发工作。2014 年底加入旷视科技公司。
+其研究方向主要集中在计算机视觉以及机器学习方面，包括物体检测，语义分割，行人姿态估计以及人体动作行为分析。
+已经在顶级会议以及期刊上面发表学术论文二十余篇。同时著有书籍一本。
+俞刚博士带队参加 2017 COCO+Places 挑战赛获得检测第一名，人体姿态估计第一名；接着带队参加 2018 COCO+Mapillary 挑战赛，获四项第一。
+个人主页\cite{Gangyu}。
+
+\paragraph{报告摘要}
+Semantic segmentation is a fundamental problem in computer vision society. 
+The main challenge is how to deal with the ambiguities when the pixels have similar appearance but different categories. 
+Context information is an important cue to deal with the problem. 
+In this talk, I will provide four approaches to model the context information in the image, covering the backbone, head and loss in the network design. 
+Competitive results have been reported based on the semantic segmentation benchmarks.
+
+\section{Pixel-Level Image Understanding with Semantic Segmentation and Panoptic Segmentation}
+
+\subsection{介绍}
+
+\paragraph{报告嘉宾}赵恒爽 (The Chinese University of Hong Kong)
+
+\paragraph{报告时间}2019年5月29日（星期三）晚上20:00（北京时间）
+
+\paragraph{报告题目}Pixel-Level Image Understanding with Semantic Segmentation and Panoptic Segmentation
+
+\paragraph{报告人简介}
+Hengshuang Zhao is currently a fourth year Ph.D. student at The Chinese University of Hong Kong, supervised by Prof. Jiaya Jia. 
+Before that, he received the B.E. degree from Huazhong University of Science and Technology in 2015. 
+His general research interests cover the broad area of computer vision and deep learning, with special emphasis on high-level image recognition and pixel-level image understanding. 
+He and his team won 1st places in ImageNet Scene Parsing Challenge 2016, LSUN Semantic Segmentation Challenge 2017 and WAD Drivable Area Segmentation Challenge 2018. 
+Part of his research projects are supported by SenseTime, Adobe, Uber and Intel. His works have been cited for about 1200 times.
+个人主页\cite{Hengshuang}。
+
+\paragraph{报告摘要}
+Pixel-Level image understanding is a fundamental while challenging task in computer vision. It predicts dense values for all pixels in the image, and is regarded as a very important task that can help achieve a deep understanding of scene, objects, and human. In this talk, I will mainly cover the topics of semantic segmentation and panoptic segmentation. For each topic, I will first go through recent deep learning based approaches and then detail our latest efforts with Point-wise Spatial Attention Network (PSANet) for semantic segmentation and Unified Panoptic Segmentation Network (UPSNet) for panoptic segmentation. Finally, I will discuss some existing problems and the remaining challenges.
+
+\renewcommand\refname{参考文献}
+\begin{thebibliography}{99}
+    \bibitem[1]{GCN} Large Kernel Matters -- Improve Semantic Segmentation by Global Convolutional Network, Chao Peng, Xiangyu Zhang, Gang Yu, Guiming Luo, Jian Sun，CVPR, 2017
+    \bibitem[2]{DFN} Learning a Discriminative Feature Network for Semantic Segmentation, Changqian Yu, Jingbo Wang, Chao Peng, Changxin Gao, Gang Yu, Nong Sang, CVPR, 2018
+    \bibitem[3]{BiSeNet} BiSeNet: Bilateral Segmentation Network for Real-time Semantic Segmentation, Changqian Yu, Jingbo Wang, Chao Peng, Changxin Gao, Gang Yu, Nong Sang, ECCV, 2018
+    \bibitem[4]{Panoptic_Megvii} http://presentations.cocodataset.org/ECCV18/COCO18-Panoptic-Megvii.pdf
+    \bibitem[5]{pspnet} Pyramid Scene Parsing Network, CVPR 2017. Hengshuang Zhao, Jianping Shi, Xiaojuan Qi, Xiaogang Wang, Jiaya Jia.
+    \bibitem[6]{ICNet} ICNet for Real - Time Semantic Segmentation on High - Resolution Images, ECCV 2018. Hengshuang Zhao, Xiaojuan Qi, Xiaoyong Shen, Jianping Shi, Jiaya Jia.
+    \bibitem[7]{PSANet}PSANet: Point - wise Spatial Attention Network for Scene Parsing, ECCV 2018. Hengshuang Zhao, Yi Zhang, Shu Liu, Jianping Shi, Chen Change Loy, Dahua Lin, Jiaya Jia.
+    \bibitem[8]{UPSNet} UPSNet: A Unified Panoptic Segmentation Network, CVPR 2019. Yuwen Xiong, Renjie Liao, Hengshuang Zhao, Rui Hu, Min Bai, Ersin Yumer, Raquel Urtasun.
+    \bibitem[9]{Hengshuang} https://hszhao.github.io/
+    \bibitem[10]{Gangyu} http://www.skicyyu.org/
+    \bibitem[11]{slides} http://valser.org/article-320-1.html
+\end{thebibliography}
+\bibliography{BiBTex}
+
+\ifx\allfiles\undefined
+\end{document}
+\fi

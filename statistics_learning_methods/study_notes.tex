@@ -1,0 +1,47 @@
+\documentclass[UTF8]{ctexart}
+
+\usepackage{hyperref}
+\usepackage{comment} 
+\usepackage{graphicx}
+\usepackage{pythonhighlight} %python代码样式
+\bibliographystyle{plain}%指定参考文献的排版样式
+
+\def\allfiles{}
+
+
+% Title
+\title{学习笔记}
+\author{zc12345 \thanks{18292885866@163.com}}
+\date\today
+ 
+\begin{document}
+
+\begin{titlepage}
+\maketitle
+\end{titlepage}
+
+\tableofcontents
+
+
+\section{简介}
+\paragraph{}
+这是一份个人学习笔记的\LaTeX练习版，主要记录学习过程中的一些重点知识和个人想法，同时练习\LaTeX的使用。
+\paragraph{}
+公式的录入使用了\cite{mathpix}的图片$\Leftrightarrow$\LaTeX转换。表格的录入使用了\cite{tablesgenerator}。
+
+\include{note1}
+
+
+% Comments 
+\begin{comment}
+don't show in text
+\end{comment}
+
+\renewcommand\refname{参考文献}
+\begin{thebibliography}{99}
+    \bibitem[1]{mathpix} Available at https://mathpix.com/
+    \bibitem[2]{tablesgenerator}  Available at http://www.tablesgenerator.com/
+\end{thebibliography}
+\bibliography{BiBTex}
+
+\end{document} 
