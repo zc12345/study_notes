@@ -1,4 +1,5 @@
-*.pdf
+*main.pdf
+20190529_semantic_segmentation.pdf
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
