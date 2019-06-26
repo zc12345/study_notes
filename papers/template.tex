@@ -1,0 +1,38 @@
+\ifx\allfiles\undefined
+\documentclass[UTF8, a4paper]{ctexart}
+\usepackage{geometry}
+\geometry{left=1.0cm, right=1.0cm, top=2.0cm, bottom=1.5cm}
+\setlength\parskip{0em}
+
+\usepackage{graphicx}
+\usepackage{pythonhighlight}
+\graphicspath{{../valse_webinar/img/}} % image directory path
+
+\begin{document}
+\title{Paper title}
+\author{Author name et al.}
+\date\today
+\maketitle
+\fi
+\section{Paper title}
+
+\subsection{Summary} % Summary写完笔记之后最后填，概述文章的内容，以后查阅笔记的时候先看这一段。
+
+\subsection{Research Objective} % Research Objective作者的研究目标。
+
+\subsection{Problem} % Problem Statement问题陈述，要解决什么问题？
+
+\subsection{Method} % Method(s)解决问题的方法/算法是什么？
+
+\subsection{Evaluation} % Evaluation作者如何评估自己的方法，有没有问题或者可以借鉴的地方。
+
+\subsection{Conclusion} % Conclusion作者给了哪些strong conclusion, 又给了哪些weak conclusion?
+
+\subsection{Notes} % Notes在这些框架外额外需要记录的笔记。
+
+\bibliography{references} % bibtex file
+\bibliographystyle{../IEEEtran} % bibtex style file
+
+\ifx\allfiles\undefined
+\end{document}
+\fi
