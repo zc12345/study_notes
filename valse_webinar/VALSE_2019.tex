@@ -1,0 +1,155 @@
+\ifx\allfiles\undefined
+\documentclass[UTF8, a4paper]{ctexart}
+\usepackage{geometry}
+\geometry{left=1.0cm, right=1.0cm, top=2.0cm, bottom=1.5cm}
+\setlength\parskip{0em}
+
+\usepackage{graphicx}
+\usepackage{pythonhighlight}
+\usepackage[colorlinks,linkcolor=red]{hyperref}
+\usepackage{url}
+\graphicspath{{../valse_webinar/img/}} % image directory path
+
+\begin{document}
+\title{VALSE 2019 合肥}
+\author{Ouyang et al.}
+\date\today
+\maketitle
+\fi
+\section{目标检测年度进展——欧阳万里}
+
+\subsection{说明}
+%{视频见\href{https://www.iqiyi.com/v_19rs83ed2g.html#curid={2896092100_27fc06073710df7018e332fe2a4e4420}。}
+\paragraph{不讨论}
+\begin{itemize}
+    \item one-shot, few-shot, weakly-supervised object detection
+    \item 显著性物体检测
+    \item keypoint detection
+\end{itemize}
+
+\paragraph{讨论}
+\begin{itemize}
+    \item 【主要】 \textbf{2D generic object detection(2018)}
+    \item 人脸检测、行人检测
+    \item 视频物体检测
+    \item 3D物体检测
+    \item 文字检测
+    \item Others on Arxiv
+\end{itemize}
+
+\subsection{引言}
+
+\paragraph{物体检测已经解决？} COCO2018 winner mAP: $56\%$
+
+\paragraph{检测难发文章？} CVPR2018: 40 ECCV2018: 32
+
+\subsection{检测的主要问题}
+
+\begin{itemize}
+    \item 小物体
+    \item 正负样本比失衡
+    \item 形变旋转
+    \item 遮挡
+    \item 速度
+    \item 定位准确度
+    \item 关系
+    \item 网络结构
+\end{itemize}
+
+\paragraph{小物体检测的问题} 
+\begin{itemize}
+    \item 在合适的分辨率训练检测器\cite{snip_Singh_2018_CVPR}: CVPR2018 oral
+    \item 不同分辨率特征分布不一致\cite{feature_interwiners_li2018feature}: ICLR2019
+\end{itemize}
+
+\paragraph{正负样本比失衡}
+\begin{itemize}
+    \item 提出：Focal Loss\cite{Focal_Loss_Lin_2017_ICCV} (ICCV 2017)
+    \item A more essential perspective: Gradient Norm\cite{gradient_harm_Li2019GradientHS} (AAAI2019 oral)
+    \item Cascade Network\cite{cascade_net_Ouyang_2017_ICCV, cascade_rcnn_Cai_2018_CVPR} (ICCV 2017)
+    \item 正样本间不平衡\cite{long_tail_distr_Ouyang_2016_CVPR}
+\end{itemize}
+
+物体检测不平衡的三个方面\cite{libra_rcnn_Pang_2019_CVPR}
+\begin{itemize}
+    \item 样本
+    \item 特征
+    \item 多任务间损失函数
+\end{itemize}
+
+\subsection{形变旋转}
+
+\paragraph{处理旋转}
+\begin{itemize}
+    \item 递进方式校正旋转\cite{Rotation_Invariant_PCN_Shi_2018_CVPR}
+    \item 可变性卷积 deformable convnets v2\cite{deformable_convnet_Dai_2017_ICCV,deformable_convnetv2_Zhu_2019_CVPR}：
+    使用更多的deformable conv layers， modulation（加权），R-CNN feature mimicking
+    \item 其他
+\end{itemize}
+
+\paragraph{处理形变} 见欧阳万里work (PAMI2016, PAMI2018, CVPR2016, CVPR2015, ICCV2013)
+
+\subsection{遮挡}
+
+\begin{itemize}
+    \item Attention mechanism\cite{occluded_pedestrian_Zhang_2018_CVPR,feature_selective_net_Zhai_2018_CVPR}
+    \item Occlusion processing unit\cite{occlusion_aware_rcnn_Zhang_2018_ECCV}
+\end{itemize}
+
+\subsection{速度}
+
+\begin{itemize}
+    \item 模型压缩\cite{mimi_efficient_net_Li_2017_CVPR,Quantization_mimic_Wei_2018_ECCV}
+    \item Cascade\cite{cascade_net_Ouyang_2017_ICCV,beyond_tradeoff_Song_2018_CVPR}
+    \item 更大batchsize，更多GPU\cite{MegDet_Peng_2018_CVPR}
+    \item 视频检测中只在少数帧做检测\cite{high_perform_video_det_Zhu_2018_CVPR,deep_feature_flow_Zhu_2017_CVPR,flow_guide_feature_aggre_Zhu_2017_ICCV}
+\end{itemize}
+
+3D物体检测\cite{fast_furious_Luo_2018_CVPR}:
+\begin{itemize}
+    \item Voxel表示3D点云
+    \item 3D卷积学特征
+    \item 多帧预测做跟踪
+\end{itemize}
+
+3D物体检测-单目\cite{GS3D_Li_2019_CVPR}:
+\begin{itemize}
+    \item 基于2D检测框与投影几何关系快速生成候选3D长方体
+    \item 利用各表面投影区域的卷积特征发掘3D结构关系
+\end{itemize}
+
+\subsection{定位准确度}
+
+\begin{itemize}
+    \item cascade RCNN 做多次bbox regression\cite{cascade_rcnn_Cai_2018_CVPR}
+    \item 定位矩形框的角点\cite{corner_local_text_Lyu_2018_CVPR,CornerNet_Law_2018_ECCV}
+    \item Corner pooling layer\cite{CornerNet_Law_2018_ECCV}
+    \item 定位目标矩形的网格点\cite{Grid_rcnn_Lu_2019_CVPR}
+    \item 预测overlap的程度，利用overlap做NMS\cite{acqu_local_confidence_Jiang_2018_ECCV}
+    \item 预测overlap的程度-instance segmentation\cite{Mask_scoring_rcnn_Huang_2019_CVPR}
+\end{itemize}
+
+\subsection{关系}
+
+\begin{itemize}
+    \item 利用场景-物体关系修正特征\cite{Structure_inferNet_Liu_2018_CVPR}
+    \item 利用物体-物体关系修正特征和去掉重复框\cite{relatNet_objDet_Hu_2018_CVPR,scene_graph_gen_Li_2017_ICCV}
+\end{itemize}
+
+\subsection{网络结构}
+
+两种网络结构：下采样 vs 下采样然后上采样\cite{FishNet_sun_2018_neurips}\\
+
+框架新探索：
+\begin{itemize}
+    \item 定位矩形框的角点\cite{corner_local_text_Lyu_2018_CVPR,CornerNet_Law_2018_ECCV}
+    \item 全卷积定位中心点，回归矩形框位置\cite{FCOS_tian2019}
+    \item Kaiming's work: Rethinking ImageNet Pre-training
+\end{itemize}
+
+\bibliography{object_detection_ref} % bibtex file
+\bibliographystyle{../IEEEtran} % bibtex style file
+
+\ifx\allfiles\undefined
+\end{document}
+\fi
